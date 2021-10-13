@@ -139,7 +139,7 @@ functions:
 
   render:
     meta:
-      short: Render template
+      short: Template Render
     labels:
       <<: *labels
       render: "step"
