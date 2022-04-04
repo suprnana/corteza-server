@@ -40,7 +40,13 @@ type (
 		module    service.ModuleService
 		locale    service.ResourceTranslationsManagerService
 		namespace service.NamespaceService
+		page      pageService
 		ac        moduleAccessController
+	}
+
+	pageService interface {
+		Find(ctx context.Context, filter types.PageFilter) (set types.PageSet, f types.PageFilter, err error)
+		DeleteByID(ctx context.Context, namespaceID, pageID uint64, pds types.PageChildrenDeleteStrategy) error
 	}
 
 	moduleAccessController interface {
@@ -60,6 +66,7 @@ func (Module) New() *Module {
 	return &Module{
 		module:    service.DefaultModule,
 		namespace: service.DefaultNamespace,
+		page:      service.DefaultPage,
 		ac:        service.DefaultAccessControl,
 		locale:    service.DefaultResourceTranslation,
 	}
@@ -139,12 +146,31 @@ func (ctrl *Module) Update(ctx context.Context, r *request.ModuleUpdate) (interf
 }
 
 func (ctrl *Module) Delete(ctx context.Context, r *request.ModuleDelete) (interface{}, error) {
-	_, err := ctrl.module.FindByID(ctx, r.NamespaceID, r.ModuleID)
+	mod, err := ctrl.module.FindByID(ctx, r.NamespaceID, r.ModuleID)
 	if err != nil {
 		return nil, err
 	}
 
-	return api.OK(), ctrl.module.DeleteByID(ctx, r.NamespaceID, r.ModuleID)
+	err = ctrl.module.DeleteByID(ctx, r.NamespaceID, r.ModuleID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Find record page for module
+	pp, _, err := ctrl.page.Find(ctx, types.PageFilter{NamespaceID: mod.NamespaceID, ModuleID: mod.ID})
+	if err != nil {
+		return nil, err
+	}
+
+	// Delete record page for module
+	for _, page := range pp {
+		err = ctrl.page.DeleteByID(ctx, mod.NamespaceID, page.ID, types.PageChildrenOnDeleteForce)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return api.OK(), nil
 }
 
 func (ctrl *Module) TriggerScript(ctx context.Context, r *request.ModuleTriggerScript) (rsp interface{}, err error) {
