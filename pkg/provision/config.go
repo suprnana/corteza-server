@@ -87,6 +87,7 @@ func collectUnimportedConfigs(ctx context.Context, log *zap.Logger, s store.Stor
 			{dir: "003_auth", fn: provisionPartialAuthClients},
 			{dir: "200_federation", fn: nil},
 			{dir: "300_automation", fn: nil},
+			{dir: "500_cypress", fn: nil},
 		}
 	)
 
