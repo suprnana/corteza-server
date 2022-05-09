@@ -79,20 +79,20 @@ allow:
       - modules.search
       - charts.search
 
-      corteza::compose:module/*/*:
-        - read
-        - records.search
+    corteza::compose:module/*/*:
+      - read
+      - records.search
 
-      corteza::compose:module-field/*/*/*:
-        - record.value.read
+    corteza::compose:module-field/*/*/*:
+      - record.value.read
 
-      corteza::compose:record/*/*/*:
-        - read
+    corteza::compose:record/*/*/*:
+      - read
 
-      corteza::compose:chart/*/*:
-        - read
+    corteza::compose:chart/*/*:
+      - read
 
-      corteza::compose:page/*/*:
+    corteza::compose:page/*/*:
         - read
 
   cypress-updater:
@@ -102,31 +102,31 @@ allow:
       - settings.manage
       - namespaces.search
 
-      corteza::compose:namespace/*:
-        - read
-        - update
-        - manage
-        - pages.search
-        - modules.search
-        - charts.search
+    corteza::compose:namespace/*:
+      - read
+      - update
+      - manage
+      - pages.search
+      - modules.search
+      - charts.search
 
-      corteza::compose:module/*/*:
-        - read
-        - update
-        - records.search
+    corteza::compose:module/*/*:
+      - read
+      - update
+      - records.search
 
-      corteza::compose:module-field/*/*/*:
-        - record.value.read
-        - record.value.update
+    corteza::compose:module-field/*/*/*:
+      - record.value.read
+      - record.value.update
 
-      corteza::compose:record/*/*/*:
-        - read
-        - update
+    corteza::compose:record/*/*/*:
+      - read
+      - update
 
-      corteza::compose:chart/*/*:
-        - read
-        - update
+    corteza::compose:chart/*/*:
+      - read
+      - update
 
-      corteza::compose:page/*/*:
+    corteza::compose:page/*/*:
         - read
         - update
