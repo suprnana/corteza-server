@@ -882,8 +882,8 @@ func QueueFilter(f systemType.QueueFilter) (ee []goqu.Expression, _ systemType.Q
 		ee = append(ee, expr)
 	}
 
-	if val := strings.TrimSpace(f.Queue); len(val) > 0 {
-		ee = append(ee, goqu.C("queue").Eq(f.Queue))
+	if val := strings.TrimSpace(f.Query); len(val) > 0 {
+		ee = append(ee, goqu.C("query").Eq(f.Query))
 	}
 
 	return ee, f, err
