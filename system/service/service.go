@@ -87,6 +87,7 @@ var (
 	DefaultApigwProfiler       *apigwProfiler
 	DefaultReport              *report
 	primaryConnectionConfig    types.DalConnection
+	DefaultDataPrivacy         *dataPrivacy
 
 	DefaultStatistics *statistics
 
@@ -209,6 +210,7 @@ func Initialize(ctx context.Context, log *zap.Logger, s store.Storer, primaryCon
 	DefaultApigwRoute = Route()
 	DefaultApigwProfiler = Profiler()
 	DefaultApigwFilter = Filter()
+	DefaultDataPrivacy = DataPrivacy(DefaultStore, DefaultAccessControl)
 
 	if err = initRoles(ctx, log.Named("rbac.roles"), c.RBAC, eventbus.Service(), rbac.Global()); err != nil {
 		return err
