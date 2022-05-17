@@ -80,6 +80,9 @@ func testAllGenerated(t *testing.T, s store.Storer) {
 	t.Run("dalConnection", func(t *testing.T) {
 		testDalConnections(t, s)
 	})
+	t.Run("dataPrivacyRequest", func(t *testing.T) {
+		testDataPrivacyRequests(t, s)
+	})
 	t.Run("federationExposedModule", func(t *testing.T) {
 		testFederationExposedModules(t, s)
 	})
