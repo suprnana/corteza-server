@@ -749,10 +749,6 @@ func DalConnectionFilter(f systemType.DalConnectionFilter) (ee []goqu.Expression
 		ee = append(ee, goqu.C("ownership").Eq(f.Ownership))
 	}
 
-	if len(f.LabeledIDs) > 0 {
-		ee = append(ee, goqu.I("id").In(f.LabeledIDs))
-	}
-
 	return ee, f, err
 }
 
