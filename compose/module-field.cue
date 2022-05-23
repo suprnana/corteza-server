@@ -33,11 +33,12 @@ moduleField: schema.#Resource & {
 
 	filter: {
 		struct: {
-			module_id: { goType: "[]uint64" }
+			module_id: { goType: "[]uint64", ident: "moduleID", storeIdent: "rel_module" }
 			deleted: { goType: "filter.State", storeIdent: "deleted_at" }
 		}
 
 		byNilState: ["deleted"]
+		byValue: ["module_id"]
 	}
 
 	features: {
