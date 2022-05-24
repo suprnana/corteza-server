@@ -24,18 +24,18 @@ var (
 )
 
 const (
-	ApplicationResourceType   		= "corteza::system:application"
-	ApigwRouteResourceType    		= "corteza::system:apigw-route"
-	AuthClientResourceType    		= "corteza::system:auth-client"
-	DataPrivacyRequestResourceType 	= "corteza::system:data-privacy-request"
-	QueueResourceType         		= "corteza::system:queue"
-	QueueMessageResourceType  		= "corteza::system:queue_message"
-	ReportResourceType        		= "corteza::system:report"
-	RoleResourceType          		= "corteza::system:role"
-	TemplateResourceType      		= "corteza::system:template"
-	UserResourceType          		= "corteza::system:user"
-	DalConnectionResourceType 		= "corteza::system:dal_connection"
-	ComponentResourceType     		= "corteza::system"
+	ApplicationResourceType        = "corteza::system:application"
+	ApigwRouteResourceType         = "corteza::system:apigw-route"
+	AuthClientResourceType         = "corteza::system:auth-client"
+	DataPrivacyRequestResourceType = "corteza::system:data-privacy-request"
+	QueueResourceType              = "corteza::system:queue"
+	QueueMessageResourceType       = "corteza::system:queue_message"
+	ReportResourceType             = "corteza::system:report"
+	RoleResourceType               = "corteza::system:role"
+	TemplateResourceType           = "corteza::system:template"
+	UserResourceType               = "corteza::system:user"
+	DalConnectionResourceType      = "corteza::system:dal_connection"
+	ComponentResourceType          = "corteza::system"
 )
 
 // RbacResource returns string representation of RBAC resource for Application by calling ApplicationRbacResource fn

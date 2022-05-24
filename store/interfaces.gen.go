@@ -61,6 +61,7 @@ type (
 		ComposeRecordValues
 		Credentials
 		DalConnections
+		DataPrivacyRequests
 		FederationExposedModules
 		FederationModuleMappings
 		FederationNodes
@@ -349,6 +350,18 @@ type (
 		TruncateDalConnections(ctx context.Context) error
 		LookupDalConnectionByID(ctx context.Context, id uint64) (*systemType.DalConnection, error)
 		LookupDalConnectionByHandle(ctx context.Context, handle string) (*systemType.DalConnection, error)
+	}
+
+	DataPrivacyRequests interface {
+		SearchDataPrivacyRequests(ctx context.Context, f systemType.DataPrivacyRequestFilter) (systemType.DataPrivacyRequestSet, systemType.DataPrivacyRequestFilter, error)
+		CreateDataPrivacyRequest(ctx context.Context, rr ...*systemType.DataPrivacyRequest) error
+		UpdateDataPrivacyRequest(ctx context.Context, rr ...*systemType.DataPrivacyRequest) error
+		UpsertDataPrivacyRequest(ctx context.Context, rr ...*systemType.DataPrivacyRequest) error
+		DeleteDataPrivacyRequest(ctx context.Context, rr ...*systemType.DataPrivacyRequest) error
+		DeleteDataPrivacyRequestByID(ctx context.Context, id uint64) error
+		TruncateDataPrivacyRequests(ctx context.Context) error
+		LookupDataPrivacyRequestByID(ctx context.Context, id uint64) (*systemType.DataPrivacyRequest, error)
+		LookupDataPrivacyRequestByName(ctx context.Context, name string) (*systemType.DataPrivacyRequest, error)
 	}
 
 	FederationExposedModules interface {
@@ -2029,6 +2042,73 @@ func LookupDalConnectionByID(ctx context.Context, s DalConnections, id uint64) (
 // This function is auto-generated
 func LookupDalConnectionByHandle(ctx context.Context, s DalConnections, handle string) (*systemType.DalConnection, error) {
 	return s.LookupDalConnectionByHandle(ctx, handle)
+}
+
+// SearchDataPrivacyRequests returns all matching DataPrivacyRequests from store
+//
+// This function is auto-generated
+func SearchDataPrivacyRequests(ctx context.Context, s DataPrivacyRequests, f systemType.DataPrivacyRequestFilter) (systemType.DataPrivacyRequestSet, systemType.DataPrivacyRequestFilter, error) {
+	return s.SearchDataPrivacyRequests(ctx, f)
+}
+
+// CreateDataPrivacyRequest creates one or more DataPrivacyRequests in store
+//
+// This function is auto-generated
+func CreateDataPrivacyRequest(ctx context.Context, s DataPrivacyRequests, rr ...*systemType.DataPrivacyRequest) error {
+	return s.CreateDataPrivacyRequest(ctx, rr...)
+}
+
+// UpdateDataPrivacyRequest updates one or more (existing) DataPrivacyRequests in store
+//
+// This function is auto-generated
+func UpdateDataPrivacyRequest(ctx context.Context, s DataPrivacyRequests, rr ...*systemType.DataPrivacyRequest) error {
+	return s.UpdateDataPrivacyRequest(ctx, rr...)
+}
+
+// UpsertDataPrivacyRequest creates new or updates existing one or more DataPrivacyRequests in store
+//
+// This function is auto-generated
+func UpsertDataPrivacyRequest(ctx context.Context, s DataPrivacyRequests, rr ...*systemType.DataPrivacyRequest) error {
+	return s.UpsertDataPrivacyRequest(ctx, rr...)
+}
+
+// DeleteDataPrivacyRequest deletes one or more DataPrivacyRequests from store
+//
+// This function is auto-generated
+func DeleteDataPrivacyRequest(ctx context.Context, s DataPrivacyRequests, rr ...*systemType.DataPrivacyRequest) error {
+	return s.DeleteDataPrivacyRequest(ctx, rr...)
+}
+
+// DeleteDataPrivacyRequestByID deletes one or more DataPrivacyRequests from store
+//
+// This function is auto-generated
+func DeleteDataPrivacyRequestByID(ctx context.Context, s DataPrivacyRequests, id uint64) error {
+	return s.DeleteDataPrivacyRequestByID(ctx, id)
+}
+
+// TruncateDataPrivacyRequests Deletes all DataPrivacyRequests from store
+//
+// This function is auto-generated
+func TruncateDataPrivacyRequests(ctx context.Context, s DataPrivacyRequests) error {
+	return s.TruncateDataPrivacyRequests(ctx)
+}
+
+// LookupDataPrivacyRequestByID searches for data privacy request by ID
+//
+// It returns data privacy request even if deleted
+//
+// This function is auto-generated
+func LookupDataPrivacyRequestByID(ctx context.Context, s DataPrivacyRequests, id uint64) (*systemType.DataPrivacyRequest, error) {
+	return s.LookupDataPrivacyRequestByID(ctx, id)
+}
+
+// LookupDataPrivacyRequestByName searches for data privacy request by name
+//
+// It returns only valid data privacy request (not deleted)
+//
+// This function is auto-generated
+func LookupDataPrivacyRequestByName(ctx context.Context, s DataPrivacyRequests, name string) (*systemType.DataPrivacyRequest, error) {
+	return s.LookupDataPrivacyRequestByName(ctx, name)
 }
 
 // SearchFederationExposedModules returns all matching FederationExposedModules from store

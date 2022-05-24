@@ -95,6 +95,9 @@ type (
 		// optional dalConnection filter function called after the generated function
 		DalConnection func(*Store, systemType.DalConnectionFilter) ([]goqu.Expression, systemType.DalConnectionFilter, error)
 
+		// optional dataPrivacyRequest filter function called after the generated function
+		DataPrivacyRequest func(*Store, systemType.DataPrivacyRequestFilter) ([]goqu.Expression, systemType.DataPrivacyRequestFilter, error)
+
 		// optional federationExposedModule filter function called after the generated function
 		FederationExposedModule func(*Store, federationType.ExposedModuleFilter) ([]goqu.Expression, federationType.ExposedModuleFilter, error)
 
@@ -752,6 +755,22 @@ func DalConnectionFilter(f systemType.DalConnectionFilter) (ee []goqu.Expression
 	if val := strings.TrimSpace(f.Ownership); len(val) > 0 {
 		ee = append(ee, goqu.C("ownership").Eq(f.Ownership))
 	}
+
+	if len(f.LabeledIDs) > 0 {
+		ee = append(ee, goqu.I("id").In(f.LabeledIDs))
+	}
+
+	return ee, f, err
+}
+
+// DataPrivacyRequestFilter returns logical expressions
+//
+// This function is called from Store.QueryDataPrivacyRequests() and can be extended
+// by setting Store.Filters.DataPrivacyRequest. Extension is called after all expressions
+// are generated and can choose to ignore or alter them.
+//
+// This function is auto-generated
+func DataPrivacyRequestFilter(f systemType.DataPrivacyRequestFilter) (ee []goqu.Expression, _ systemType.DataPrivacyRequestFilter, err error) {
 
 	return ee, f, err
 }
