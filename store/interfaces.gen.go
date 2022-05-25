@@ -361,7 +361,6 @@ type (
 		DeleteDataPrivacyRequestByID(ctx context.Context, id uint64) error
 		TruncateDataPrivacyRequests(ctx context.Context) error
 		LookupDataPrivacyRequestByID(ctx context.Context, id uint64) (*systemType.DataPrivacyRequest, error)
-		LookupDataPrivacyRequestByName(ctx context.Context, name string) (*systemType.DataPrivacyRequest, error)
 	}
 
 	FederationExposedModules interface {
@@ -2100,15 +2099,6 @@ func TruncateDataPrivacyRequests(ctx context.Context, s DataPrivacyRequests) err
 // This function is auto-generated
 func LookupDataPrivacyRequestByID(ctx context.Context, s DataPrivacyRequests, id uint64) (*systemType.DataPrivacyRequest, error) {
 	return s.LookupDataPrivacyRequestByID(ctx, id)
-}
-
-// LookupDataPrivacyRequestByName searches for data privacy request by name
-//
-// It returns only valid data privacy request (not deleted)
-//
-// This function is auto-generated
-func LookupDataPrivacyRequestByName(ctx context.Context, s DataPrivacyRequests, name string) (*systemType.DataPrivacyRequest, error) {
-	return s.LookupDataPrivacyRequestByName(ctx, name)
 }
 
 // SearchFederationExposedModules returns all matching FederationExposedModules from store

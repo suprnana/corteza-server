@@ -365,7 +365,6 @@ type (
 	// auxDataPrivacyRequest is an auxiliary structure used for transporting to/from RDBMS store
 	auxDataPrivacyRequest struct {
 		ID          uint64                   `db:"id"`
-		Name        string                   `db:"name"`
 		Kind        systemType.RequestKind   `db:"kind"`
 		Status      systemType.RequestStatus `db:"status"`
 		RequestedAt time.Time                `db:"requested_at"`
@@ -1884,7 +1883,6 @@ func (aux *auxDalConnection) scan(row scanner) error {
 // This function is auto-generated
 func (aux *auxDataPrivacyRequest) encode(res *systemType.DataPrivacyRequest) (_ error) {
 	aux.ID = res.ID
-	aux.Name = res.Name
 	aux.Kind = res.Kind
 	aux.Status = res.Status
 	aux.RequestedAt = res.RequestedAt
@@ -1906,7 +1904,6 @@ func (aux *auxDataPrivacyRequest) encode(res *systemType.DataPrivacyRequest) (_ 
 func (aux auxDataPrivacyRequest) decode() (res *systemType.DataPrivacyRequest, _ error) {
 	res = new(systemType.DataPrivacyRequest)
 	res.ID = aux.ID
-	res.Name = aux.Name
 	res.Kind = aux.Kind
 	res.Status = aux.Status
 	res.RequestedAt = aux.RequestedAt
@@ -1928,7 +1925,6 @@ func (aux auxDataPrivacyRequest) decode() (res *systemType.DataPrivacyRequest, _
 func (aux *auxDataPrivacyRequest) scan(row scanner) error {
 	return row.Scan(
 		&aux.ID,
-		&aux.Name,
 		&aux.Kind,
 		&aux.Status,
 		&aux.RequestedAt,

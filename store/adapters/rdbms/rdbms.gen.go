@@ -10510,49 +10510,6 @@ func (s *Store) LookupDataPrivacyRequestByID(ctx context.Context, id uint64) (_ 
 	return aux.decode()
 }
 
-// LookupDataPrivacyRequestByName searches for data privacy request by name
-//
-// It returns only valid data privacy request (not deleted)
-//
-// This function is auto-generated
-func (s *Store) LookupDataPrivacyRequestByName(ctx context.Context, name string) (_ *systemType.DataPrivacyRequest, err error) {
-	var (
-		rows   *sql.Rows
-		aux    = new(auxDataPrivacyRequest)
-		lookup = dataPrivacyRequestSelectQuery(s.Dialect).Where(
-			goqu.I("name").Eq(name),
-			goqu.I("deleted_at").IsNull(),
-		).Limit(1)
-	)
-
-	rows, err = s.Query(ctx, lookup)
-	if err != nil {
-		return
-	}
-
-	defer func() {
-		closeError := rows.Close()
-		if err == nil {
-			// return error from close
-			err = closeError
-		}
-	}()
-
-	if err = rows.Err(); err != nil {
-		return
-	}
-
-	if !rows.Next() {
-		return nil, store.ErrNotFound.Stack(1)
-	}
-
-	if err = aux.scan(rows); err != nil {
-		return
-	}
-
-	return aux.decode()
-}
-
 // sortableDataPrivacyRequestFields returns all <no value> columns flagged as sortable
 //
 // With optional string arg, all columns are returned aliased
@@ -10631,33 +10588,6 @@ func (s *Store) collectDataPrivacyRequestCursorValues(res *systemType.DataPrivac
 //
 // This function is auto-generated
 func (s *Store) checkDataPrivacyRequestConstraints(ctx context.Context, res *systemType.DataPrivacyRequest) (err error) {
-	err = func() (err error) {
-
-		// handling string type as default
-		if len(res.Name) == 0 {
-			// skip check on empty values
-			return nil
-		}
-
-		if res.DeletedAt != nil {
-			// skip check if value is not nil
-			return nil
-		}
-
-		ex, err := s.LookupDataPrivacyRequestByName(ctx, res.Name)
-		if err == nil && ex != nil && ex.ID != res.ID {
-			return store.ErrNotUnique.Stack(1)
-		} else if !errors.IsNotFound(err) {
-			return err
-		}
-
-		return nil
-	}()
-
-	if err != nil {
-		return
-	}
-
 	return nil
 }
 

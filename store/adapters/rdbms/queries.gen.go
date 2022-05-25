@@ -2532,7 +2532,6 @@ var (
 	dataPrivacyRequestSelectQuery = func(d goqu.DialectWrapper) *goqu.SelectDataset {
 		return d.Select(
 			"id",
-			"name",
 			"kind",
 			"status",
 			"requested_at",
@@ -2555,7 +2554,6 @@ var (
 		return d.Insert(dataPrivacyRequestTable).
 			Rows(goqu.Record{
 				"id":           res.ID,
-				"name":         res.Name,
 				"kind":         res.Kind,
 				"status":       res.Status,
 				"requested_at": res.RequestedAt,
@@ -2581,7 +2579,6 @@ var (
 			OnConflict(
 				goqu.DoUpdate(target[1:],
 					goqu.Record{
-						"name":         res.Name,
 						"kind":         res.Kind,
 						"status":       res.Status,
 						"requested_at": res.RequestedAt,
@@ -2605,7 +2602,6 @@ var (
 	dataPrivacyRequestUpdateQuery = func(d goqu.DialectWrapper, res *systemType.DataPrivacyRequest) *goqu.UpdateDataset {
 		return d.Update(dataPrivacyRequestTable).
 			Set(goqu.Record{
-				"name":         res.Name,
 				"kind":         res.Kind,
 				"status":       res.Status,
 				"requested_at": res.RequestedAt,
