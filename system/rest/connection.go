@@ -50,7 +50,7 @@ func (Connection) New() *Connection {
 	}
 }
 
-func (ctrl Connection) List(ctx context.Context, r *request.ConnectionList) (interface{}, error) {
+func (ctrl Connection) List(ctx context.Context, r *request.DalConnectionList) (interface{}, error) {
 	var (
 		err error
 		set types.DalConnectionSet
@@ -81,7 +81,7 @@ func (ctrl Connection) List(ctx context.Context, r *request.ConnectionList) (int
 	return ctrl.makeFilterPayload(ctx, set, f, err)
 }
 
-func (ctrl Connection) Create(ctx context.Context, r *request.ConnectionCreate) (interface{}, error) {
+func (ctrl Connection) Create(ctx context.Context, r *request.DalConnectionCreate) (interface{}, error) {
 	connection := &types.DalConnection{
 		Handle: r.Handle,
 
@@ -99,7 +99,7 @@ func (ctrl Connection) Create(ctx context.Context, r *request.ConnectionCreate) 
 	return ctrl.svc.Create(ctx, connection)
 }
 
-func (ctrl Connection) Update(ctx context.Context, r *request.ConnectionUpdate) (interface{}, error) {
+func (ctrl Connection) Update(ctx context.Context, r *request.DalConnectionUpdate) (interface{}, error) {
 	connection := &types.DalConnection{
 		ID:     r.ConnectionID,
 		Handle: r.Handle,
@@ -118,19 +118,19 @@ func (ctrl Connection) Update(ctx context.Context, r *request.ConnectionUpdate) 
 	return ctrl.svc.Update(ctx, connection)
 }
 
-func (ctrl Connection) ReadPrimary(ctx context.Context, r *request.ConnectionReadPrimary) (interface{}, error) {
+func (ctrl Connection) ReadPrimary(ctx context.Context, r *request.DalConnectionReadPrimary) (interface{}, error) {
 	return ctrl.svc.FindByID(ctx, 0)
 }
 
-func (ctrl Connection) Read(ctx context.Context, r *request.ConnectionRead) (interface{}, error) {
+func (ctrl Connection) Read(ctx context.Context, r *request.DalConnectionRead) (interface{}, error) {
 	return ctrl.svc.FindByID(ctx, r.ConnectionID)
 }
 
-func (ctrl Connection) Delete(ctx context.Context, r *request.ConnectionDelete) (interface{}, error) {
+func (ctrl Connection) Delete(ctx context.Context, r *request.DalConnectionDelete) (interface{}, error) {
 	return api.OK(), ctrl.svc.DeleteByID(ctx, r.ConnectionID)
 }
 
-func (ctrl Connection) Undelete(ctx context.Context, r *request.ConnectionUndelete) (interface{}, error) {
+func (ctrl Connection) Undelete(ctx context.Context, r *request.DalConnectionUndelete) (interface{}, error) {
 	return api.OK(), ctrl.svc.UndeleteByID(ctx, r.ConnectionID)
 }
 
