@@ -10524,8 +10524,10 @@ func (Store) sortableDataPrivacyRequestFields() map[string]string {
 		"deleted_at":   "deleted_at",
 		"deletedat":    "deleted_at",
 		"id":           "id",
+		"kind":         "kind",
 		"requested_at": "requested_at",
 		"requestedat":  "requested_at",
+		"status":       "status",
 		"updated_at":   "updated_at",
 		"updatedat":    "updated_at",
 	}
@@ -10556,6 +10558,10 @@ func (s *Store) collectDataPrivacyRequestCursorValues(res *systemType.DataPrivac
 				case "id":
 					cur.Set(c.Column, res.ID, c.Descending)
 					pkID = true
+				case "kind":
+					cur.Set(c.Column, res.Kind, c.Descending)
+				case "status":
+					cur.Set(c.Column, res.Status, c.Descending)
 				case "requestedAt":
 					cur.Set(c.Column, res.RequestedAt, c.Descending)
 				case "completedAt":
